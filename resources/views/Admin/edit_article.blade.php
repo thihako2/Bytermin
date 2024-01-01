@@ -37,6 +37,17 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="next_link">Next link</label>
+                        <input type="text" class="form-control" id="next_link" name="next_link"
+                            value="{{ old('next_link', $article[0]->next_link !==null ? $article[0]->next_link: '') }}" >
+                    </div>
+                    <div class="form-group">
+                        <label for="previous_link">Previous link</label>
+                        <input type="text" class="form-control" id="previous_link" name="previous_link"
+                            value="{{ old('next_link', $article[0]->previous_link !==null ? $article[0]->previous_link: '') }}">
+                    </div>
+
                     <div class="form-group mt-3 col">
                         <label for="image">Article Image (click image to edit)</label>
                         <img src="{{ $article[0]->image }}" onclick="document.getElementById('image').click()"
@@ -77,7 +88,7 @@
 
                         </textarea>
                     </div>
-                    <div><label for=""></label></div>
+                    
                 </form>
             </div>
         </div>
