@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             //
-            $table->string('previous_link');
-            $table->string('next_link');
+            $table->string('previous_link')->nullable();
+            $table->string('next_link')->nullable();
         });
     }
 

@@ -12,6 +12,8 @@ class Articles extends Model
         'title',
         'body',
         'image',
-        'author_id'
+        'author_id',
+        'next_link',
+        'previous_link'
     ];
 }

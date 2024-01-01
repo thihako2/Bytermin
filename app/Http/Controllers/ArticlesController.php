@@ -59,6 +59,16 @@ class ArticlesController extends Controller
 
                 ]);
             }
+
+            Log::debug("is next_link exists" . $request->has('next_link'));
+
+            if($request->input('next_link') !== null){
+                $article->next_link = $request->input('next_link');
+            }
+
+            if($request->input('previous_link') !== null){
+                $article->previous_link = $request->input('previous_link');
+            }
             $article->title = $request->input('title');
             $article->body = $request->input('body');
             $article->author_id = auth()->user()->id;
@@ -99,13 +109,21 @@ class ArticlesController extends Controller
 
         $imagePath = asset('article_images/' . $fileName);
 
+
+        
+
         try {
+            
             // Create a new article
             $article = new Articles();
+
+            
             $article->title = $request->input('title');
             $article->body = $request->input('body');
             $article->image = $imagePath;
             $article->author_id = auth()->user()->id;
+
+            
             $article->save();
         } catch (Exception $e) {
             Log::debug($e);
@@ -150,9 +168,9 @@ class ArticlesController extends Controller
      */
     public function showdetail($id)
     {
-        Log::debug($id);
+        // Log::debug($id);
         $article = Articles::where('id', $id)->get();
-        Log::debug($article[0]);
+        // Log::debug($article[0]);
         //dd($article);
         return view('detail', ['article' => $article]);
     }
