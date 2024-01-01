@@ -4,7 +4,7 @@
     <div class="position-relative fixed-top container-fluid w-100 min-vh-100 p-0">
         <div class="postion-absolute mt-4 container-fluid w-100 min-vh-100 d-flex justify-content-center align-items-center top-50 p-0 m-0"
             style="z-index: 99!important;">
-            <button type="button" class="btn btn-light m-2">Get Started</button>
+            <a type="button" href="{{ route('home') }}" class="btn btn-light m-2">Get Started</a>
             <a type="button" href="{{ route('login') }}" class="btn btn-light m-2">Login</a>
         </div>
         <div class="position-absolute container-fluid w-100 min-vh-100 p-0 top-0"

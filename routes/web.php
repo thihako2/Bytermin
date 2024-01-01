@@ -39,8 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/articles/store', [App\Http\Controllers\ArticlesController::class, 'store'])
             ->name('article.create.store');
     });
-
-
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
+
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');   
 Route::get('/article/detail/{id}', [App\Http\Controllers\ArticlesController::class, 'showdetail'])->name('detail');
