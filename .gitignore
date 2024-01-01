@@ -17,5 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/package-lock.json
+/public/article_images
 
 .vercel
