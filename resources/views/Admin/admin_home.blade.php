@@ -4,6 +4,7 @@
     <style>
         #item {
             text-decoration: none;
+            
         }
     </style>
 @endsection
@@ -33,10 +34,22 @@
                                                 <div class="col-3">
                                                     <img src="{{ $article->image }}" alt="" style="width:100px">
                                                 </div>
-                                                <div class="col-6">
-                                                    <h4>
-                                                        {{ $article->title }}
-                                                    </h4>
+                                                <div class="col-6" style="max-height:120px !important;overflow: hidden; white-space: warp; text-overflow: ellipsis !important;">
+                                                    <div class="row">
+                                                        <h4>
+                                                            {{ $article->title }}
+                                                        </h4>
+                                                    </div>
+                                                    
+                                                    <div class="row" style="overflow: hidden; text-overflow: ellipsis;">
+                                                    <!-- {!! $article->body !!} -->
+                                                        <!-- <div class="collapse" id="collapseExample">
+                                                            <div class="card card-body"> -->
+                                                                {!! $article->body !!}
+                                                            <!-- </div>
+                                                        </div> -->
+                                                    </div>
+                                                    ...
                                                 </div>
 
                                             </div>
@@ -45,7 +58,9 @@
                                             <div class="row justify-content-end">
                                                 <div class="col-3 mt-3 d-flex justify-content-end">
                                                     <div><a href="{{ url('/admin/articles/edit/' . $article->id) }}"
-                                                            id="item" type="button" class="btn btn-success">Edit</a>
+                                                            id="item" type="button" class="btn btn-success"><i class='fas fa-marker'></i>Edit</a>
+                                                            <!-- <button type="button" value="Copy Url" onclick="Copy();" ></button> -->
+                                                            <button type="button" class="btn btn-secondary" onclick="Copy({{$article->id}});">Copy url</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,7 +68,6 @@
                                         <hr>
                                     </li>
                                 </ul>
-                                {{-- {!! $article->body !!} --}}
                             @endforeach
                         @endif
                         {{-- @if (session('status'))
@@ -68,4 +82,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('additionalscript')
+<script>
+    function Copy(id) {
+        let url = '{{ env("APP_URL")}}'+"/article/detail/" +id.toString();
+
+        navigator.clipboard.writeText(url).then(function() {
+            console.log('Copied!');
+        }, function() {
+            console.log('Copy error')
+        });
+    }
+</script>
 @endsection
