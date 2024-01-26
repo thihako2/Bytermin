@@ -29,11 +29,6 @@ class ArticlesController extends Controller
     {
 
         Log::debug('update method');
-
-
-
-
-
         try {
             // Find the article by id and update it
             $article = Articles::find($id);
@@ -62,11 +57,11 @@ class ArticlesController extends Controller
 
             Log::debug("is next_link exists" . $request->has('next_link'));
 
-            if($request->input('next_link') !== null){
+            if ($request->input('next_link') !== null) {
                 $article->next_link = $request->input('next_link');
             }
 
-            if($request->input('previous_link') !== null){
+            if ($request->input('previous_link') !== null) {
                 $article->previous_link = $request->input('previous_link');
             }
             $article->title = $request->input('title');
@@ -91,7 +86,6 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         Log::debug('store method');
-        //
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -108,22 +102,14 @@ class ArticlesController extends Controller
         $request->file('image')->move(public_path('article_images'), $fileName);
 
         $imagePath = asset('article_images/' . $fileName);
-
-
-        
-
         try {
-            
+
             // Create a new article
             $article = new Articles();
-
-            
             $article->title = $request->input('title');
             $article->body = $request->input('body');
             $article->image = $imagePath;
             $article->author_id = auth()->user()->id;
-
-            
             $article->save();
         } catch (Exception $e) {
             Log::debug($e);

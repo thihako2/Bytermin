@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ApiArticlesController;
+use App\Http\Controllers\API\Auth\ApiAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', [ApiAuthController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::middleware('is_admin_api')->group(function () {
+        Route::post('create/article', [ApiArticlesController::class, 'store']);
+    });
 });
+
+Route::get('list/articles', [ApiArticlesController::class, 'articles']);
